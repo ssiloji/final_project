@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Survey Data</title>
+    <style>
+        td {
+            padding: 10px;
+            font-size: 18px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="./assets/css/index.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+    </head>
+
+<body>
+    <header>
+
+        
+        <div class="header">
+            <a class="link" href="index.html"><img src="./assets/siteimages/logo.png" class="logo"></a>
+            <a class="link" href="index.html" style="margin-left: auto;">Home</a>
+            <a class="link" href="programdescription.html">Program Description</a>
+            <a class="link active" href="teachingassistance.html">Teaching Assistance</a>
+            <a class="link" href="gpacalucator.html">GPA Calcuator</a>
+            <a class="link" href="contactus.html">Contact Us</a>
+            
+       </div> 
+
+
+    </header>
+
+    <main>
+
+        <div class="show-survey-content" style="border:none">
+            <div class="item2">
+                <div id="surveydata"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer">
+            <div class="grid">
+                <div class="grid-item">
+                    <img src="./assets/siteimages/logo.png" style="height:70px;">
+                </div>
+                <div class="grid-item">
+                    <h2>Contact:</h2>
+                    <b>Lei (Lee) Wu.</b>
+                    <br>Department of Computer Science & Computer Information Systems (CSCI)
+                    <br>College of Science (CoS), Auburn University at Montgomery (AUM)
+                    <br>Office: Goodwyn Hall 310-Q
+                    <br>E-Mail: lwu@aum.edu
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <center>© 2021 Copyright:
+                AUM</a></center>
+
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var data = location.search.replace("?", "");
+            if (data == "") return;
+            var fields = data.split("&");
+            if (fields.length == 0) 
+                $("#surveydata").html("<p>No data was submitted.</p>");
+             else {
+                let showkage=`<center><table class='table' style='border:none'>
+                    <tr><th colspan=2><h2>Survey Data</h2></th></tr>`;
+                fields.forEach(item=>{
+                    field = item.split("=");
+                    console.log(field[1])
+                    showkage=showkage+`<tr><td style='color:orangered;'>${field[0]}</td>
+                    <td>${field[1]}</td></tr>`;
+                })
+                showkage=showkage+"</table></center>";
+                setTimeout(()=>{
+                    $("#surveydata").html(showkage)
+                },1000)
+                    
+            }
+        })
+//]]>
+    </script>
+
+
+</body>
+
+</html>

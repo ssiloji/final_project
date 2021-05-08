@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GPA Calculator</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <div class="header">
+        <a class="link" href="index.html"><img src="./assets/siteimages/logo.png" class="logo"></a>
+        <a class="link" href="index.html" style="margin-left: auto;">Home</a>
+        <a class="link" href="programdescription.html">Program Description</a>
+        <a class="link" href="teachingassistance.html">Teaching Assistance</a>
+        <a class="link active" href="gpacalucator.html">GPA Calcuator</a>
+        <a class="link" href="contactus.html">Contact Us</a>
+        
+   </div> 
+   <div class="bannerimage">
+    <div class="banner-title-bg">
+        GPA Calculator
+    </div>
+</div>
+
+    <br><br>
+
+    <main>
+
+        <div class="grid">
+            <div class="grid-item"></div>
+            <div class="grid-item">
+                        Number of entries(Subjects):
+                        <input id="entries" type="number" min=0 class="form-field">
+                        <br><br>
+                    <button id="getEntries" class="button">Get Fields</button>
+                        
+
+                    <table class="table-form"  id="form-table">
+                        <tbody id="credit_hours">
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" style="width: 100%;">
+                                    <input type='button' class='button' value='Get GPA' id='caluclate_gpa' />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="width: 100%;text-align: center;" id="gpa">
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <div>
+                </div>
+                <div id="gpa"></div>
+            </div>
+            <div class="grid-item"></div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer">
+            <div class="grid">
+                <div class="grid-item">
+                    <img src="./assets/siteimages/logo.png" style="height:70px;">
+                </div>
+                <div class="grid-item">
+                    <h2>Contact:</h2>
+                    <b>Lei (Lee) Wu.</b>
+                    <br>Department of Computer Science & Computer Information Systems (CSCI)
+                    <br>College of Science (CoS), Auburn University at Montgomery (AUM)
+                    <br>Office: Goodwyn Hall 310-Q
+                    <br>E-Mail: lwu@aum.edu
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <center>© 2021 Copyright:
+                AUM</a></center>
+
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+    $("#grade-form-table").hide();
+    $("#caluclate_gpa").hide();
+    $("#getEntries").click(function(){
+        let entries = $("#entries").val();
+        let form='';
+        for(let i=0;i<entries;i++)
+        {
+            form=form+"<tr><td style='color:orangered'>Letter Grade<td></td><td> \
+                        <select id='grade"+i+"'  class='form-field' style='width:100%;'> \
+                        <option value='4.0'>A</option> \
+                        <option value='3.0'>B</option> \
+                        <option value='2.0'>C</option> \
+                        <option value='1.0'>D</option> \
+                        <option value='0.0'>F</option> \
+                        </select></td></tr> \
+                        <tr><td  style='color:orangered'>Credit Hours<td></td><td><input id='credit_hours"+i+"' type='number' min=1 value=1 class='form-field'></td></tr>";
+        }
+        $("#form-table").show();
+        $("#caluclate_gpa").show();
+        $("#credit_hours").html(form);
+        $("#gpa").html('');
+    });
+    $("#caluclate_gpa").click(function(){
+
+        var numerator=0,denominator=0;
+        let entries = $("#entries").val();
+        for (i=0;i<entries;i++){
+            grade=parseFloat($("#grade"+i).val());
+            credit_hours=parseInt($("#credit_hours"+i).val());
+            numerator+=grade*credit_hours;
+            denominator+=credit_hours;
+        }
+        if(entries>0){
+            $("#gpa").html('<h3>Average GPA: '+ (numerator/denominator).toFixed(1)+"</h3>");
+        }
+    });
+    
+})
+    </script>
+</body>
+
+</html>
